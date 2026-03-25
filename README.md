@@ -75,3 +75,25 @@ This PoC demonstrates:
 
 PoC complete for OpenAPI → ApiTemplate pipeline.  
 Working toward deeper integration with API Dash architecture.
+
+---
+
+## Notes on Categorization
+
+During development, an important issue was identified in naive keyword-based tagging:
+
+- Substring matches (e.g., `"ai"` inside `"api"`) caused incorrect classification
+- Metadata fields (like API title) introduced noise
+
+### Improvements Made
+
+- Switched to **word-level tokenization** to avoid substring false positives
+- Introduced **weighted scoring**:
+  - Endpoint paths → high weight (most reliable signal)
+  - Tags → medium weight
+  - API name → low weight (often noisy)
+- Ensured category taxonomy completeness (e.g., added "Country & Geography")
+
+### Result
+
+More accurate domain-based classification driven by endpoint semantics rather than superficial keyword matches.

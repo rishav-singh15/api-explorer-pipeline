@@ -3,7 +3,7 @@
     "name": "API Dash APIs",
     "description": "Open Source APIs for all!"
   },
-  "category": "AI",
+  "category": "Country & Geography",
   "requests": [
     {
       "method": "GET",

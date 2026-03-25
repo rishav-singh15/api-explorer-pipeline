@@ -1,5 +1,6 @@
 import requests
 import json
+import re
 
 OPENAPI_URL = "https://api.apidash.dev/openapi.json"
 BASE_URL = "https://api.apidash.dev"
@@ -9,6 +10,9 @@ CATEGORY_RULES = {
     "Finance": ["finance", "payment", "bank", "currency"],
     "Weather": ["weather", "forecast", "climate"],
     "Developer Tools": ["convert", "parse", "format"],
+    "Country & Geography": [
+        "country", "flag", "region", "location", "geo", "nation"
+    ]
 }
 
 def fetch_openapi(url):
@@ -34,19 +38,36 @@ def extract_endpoints(data):
 
     return endpoints
 
+import re
+
+import re
+
 def infer_category(api_name, tags, paths):
-    signal = " ".join([
-        api_name.lower(),
-        " ".join(tags).lower(),
-        " ".join(paths).lower()
-    ])
+    name_words = re.findall(r'\b\w+\b', api_name.lower())
+    tag_words = re.findall(r'\b\w+\b', " ".join(tags).lower())
+    path_words = re.findall(r'\b\w+\b', " ".join(paths).lower())
+
+    best_category = "General"
+    max_score = 0
 
     for category, keywords in CATEGORY_RULES.items():
-        for keyword in keywords:
-            if keyword in signal:
-                return category
+        score = 0
 
-    return "General"
+        for keyword in keywords:
+            # Strong weight for paths
+            score += 3 * path_words.count(keyword)
+
+            # Medium for tags
+            score += 2 * tag_words.count(keyword)
+
+            # Weak for name
+            score += 1 * name_words.count(keyword)
+
+        if score > max_score:
+            max_score = score
+            best_category = category
+
+    return best_category
 
 def build_template(data, endpoints):
     info = data.get("info", {})
