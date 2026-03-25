@@ -1,0 +1,19 @@
+{
+  "templates": [
+    {
+      "info": {
+        "name": "Country API",
+        "description": "Country info APIs"
+      },
+      "category": "Country & Geography",
+      "requests": [
+        {
+          "method": "GET",
+          "url": "https://api.apidash.dev/country/data",
+          "headers": {},
+          "body": {}
+        }
+      ]
+    }
+  ]
+}
