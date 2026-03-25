@@ -1,0 +1,39 @@
+{
+  "info": {
+    "name": "API Dash APIs",
+    "description": "Open Source APIs for all!"
+  },
+  "category": "AI",
+  "requests": [
+    {
+      "method": "GET",
+      "url": "https://api.apidash.dev/country/codes",
+      "headers": {},
+      "body": {}
+    },
+    {
+      "method": "GET",
+      "url": "https://api.apidash.dev/country/data",
+      "headers": {},
+      "body": {}
+    },
+    {
+      "method": "GET",
+      "url": "https://api.apidash.dev/country/flag",
+      "headers": {},
+      "body": {}
+    },
+    {
+      "method": "GET",
+      "url": "https://api.apidash.dev/country/name",
+      "headers": {},
+      "body": {}
+    },
+    {
+      "method": "GET",
+      "url": "https://api.apidash.dev/country/officialname",
+      "headers": {},
+      "body": {}
+    }
+  ]
+}
